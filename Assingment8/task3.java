@@ -22,7 +22,7 @@ System.out.println("Intern gets 5% bonus");
 }
 }
 
-public class task3 {
+public class Task3 {
     public static void main(String[] args) {
     Employee e1 = new Manager();
     e1.calculateBonus();
