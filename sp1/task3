@@ -1,0 +1,44 @@
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    // 1. Write a program to save a user into the database
+    @PostMapping
+    public User saveUser(@RequestBody User user) {
+        return userRepository.save(user);
+    }
+
+    // 2. Write a program to fetch all users
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    // 3. Write a program to fetch a user by ID
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    // 4. Update user details by ID & Delete a user by ID
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User details) {
+        User user = userRepository.findById(id).get();
+        user.setName(details.getName());
+        user.setEmail(details.getEmail());
+        return userRepository.save(user);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        userRepository.deleteById(id);
+        return "User deleted successfully!";
+    }
+}

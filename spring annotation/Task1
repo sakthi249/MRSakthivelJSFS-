@@ -1,0 +1,28 @@
+
+
+
+package com.example.demo;
+
+import org.springframework.web.bind.annotation.*;
+import java.util.*;
+
+@RestController
+@RequestMapping("/api/users")
+public class Task1 {
+
+    private List<String> users =
+            new ArrayList<>(Arrays.asList("Sakthi", "Priya", "Aqua"));
+
+    @GetMapping("/{id}")
+    public String getUserById(@PathVariable int id) {
+
+        if (id >= 0 && id < users.size()) {
+
+            return users.get(id);
+
+        } else {
+
+            return "User not found";
+        }
+    }
+}

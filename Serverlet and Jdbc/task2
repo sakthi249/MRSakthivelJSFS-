@@ -1,0 +1,44 @@
+
+
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+    doGet(request, response);
+
+    String id = request.getParameter("id");
+    String name = request.getParameter("name");
+    String email = request.getParameter("email");
+
+    Connection con = null;
+    PreparedStatement pstmt = null;
+
+    response.setContentType("text/html");
+    PrintWriter out = response.getWriter();
+
+    try {
+        con = DriverManager.getConnection(DB_URL, USER, PASS);
+
+        String sql = "INSERT INTO users (id, name, email) VALUES (?, ?, ?)";
+
+        pstmt = con.prepareStatement(sql);
+
+        pstmt.setInt(1, Integer.parseInt(id));
+        pstmt.setString(2, name);
+        pstmt.setString(3, email);
+
+        int rows = pstmt.executeUpdate();
+
+        if (rows > 0) {
+            out.println("<h3>User record inserted successfully!</h3>");
+        } else {
+            out.println("<h3>Failed to insert user record.</h3>");
+        }
+
+    } catch (SQLException e) {
+        out.println("<h3>Error: " + e.getMessage() + "</h3>");
+    } finally {
+
+    }
+}

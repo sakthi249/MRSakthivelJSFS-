@@ -1,0 +1,14 @@
+
+
+
+package com.example.demo;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Task4 {
+
+    public String getGreetingMessage(String name) {
+        return "Hello, " + name + "! Welcome to Spring Boot.";
+    }
+}

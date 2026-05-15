@@ -1,0 +1,29 @@
+
+
+
+
+
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+    doGet(request, response);
+
+    String username = request.getParameter("username");
+    String password = request.getParameter("password");
+
+    // 2. Validate (static values or database)
+    // Example: static values
+    String validUser = "sakthi";
+    String validPass = "12345";
+
+    response.setContentType("text/html");
+    PrintWriter out = response.getWriter();
+
+    if (username.equals(validUser) && password.equals(validPass)) {
+        // 3. Redirect on success
+        response.sendRedirect("welcome.jsp");
+    } else {
+        // 4. Redirect on failure
+        response.sendRedirect("error.jsp");
+    }
+}

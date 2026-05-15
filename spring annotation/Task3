@@ -1,0 +1,28 @@
+
+
+
+package com.example.demo;
+
+import org.springframework.stereotype.Service;
+import java.util.*;
+
+@Service
+public class Task3 {
+
+    private Map<Integer, String> users = new HashMap<>();
+
+    public Task3() {
+        users.put(1, "sakthi");
+        users.put(2, "aqua");
+        users.put(3, "bayaz");
+    }
+
+    public String getUserById(int id) {
+        return users.getOrDefault(id, "User not found");
+    }
+
+    public String addUser(int id, String name) {
+        users.put(id, name);
+        return "User added: " + name;
+    }
+}
